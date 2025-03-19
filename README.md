@@ -48,12 +48,32 @@ public-hoist-pattern[]=*@heroui/*
 
 After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
 
-## License
+## Call `Google Translate`
 
-Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
+``` text
+https://translate.google.com/?sl=ja&tl=en&text=%E6%88%91&op=translate
+```
 
-## Import Vocabulary
+## Import Vocabulary from csv
+
+```shell
+head ../l2pre/words1.csv
+```
+
+``` csv
+"as a result","結果として，その結果"
+"look up","を調べる"
+"available","利用できる，使用可能な"
+"at first","最初は，初めに"
+"in the past","過去に"
+"nowadays","最近，近頃"
+"information","情報"
+```
 
 ```shell
 cat ../l2pre/words1.csv | awk -F\" '{print "insert into vocabulary (lang_source, lang_target, from_message, to_message, batch_no) values (\"en\", \"ja\",\""$2"\",\""$4"\",1);"}' | sqlite3 prisma/dev.db                                                                   ─╯
 ```
+
+## License
+
+Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).

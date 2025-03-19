@@ -1,15 +1,10 @@
-import { Link } from "@heroui/link";
-
 import prisma from "@/lib/prisma";
+import { VocabolaryTable } from "@/components/vocabulary-table";
+import { Prisma } from "@prisma/client";
 
 // random
 export default async function Posts() {
-  const vocabularies = await prisma.vocabulary.findMany();
-
-  return vocabularies.map((voca) => (
-    <li key={voca.id}>
-      <Link href={`/posts/${voca.id}`}>{voca.from_message}</Link>
-      <span className="text-sm text-gray-600 ml-2">by {voca.to_message}</span>
-    </li>
-  ));
+  const vocabularies: Prisma.VocabularyGetPayload<{}>[] =
+    await prisma.vocabulary.findMany();
+  return <VocabolaryTable data={vocabularies} />;
 }
