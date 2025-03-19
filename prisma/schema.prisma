@@ -24,3 +24,18 @@ model Post {
   author    User    @relation(fields: [authorId], references: [id])
   authorId  Int
 }
+
+model Vocabulary {
+  id              Int     @id @default(autoincrement())
+  lang_source     String
+  lang_target     String
+  from_message    String
+  to_message      String
+  batch_no        Int
+}
+
+model FillSentence {
+  id            Int     @id @default(autoincrement())
+  sentence      String
+  answer        String
+}

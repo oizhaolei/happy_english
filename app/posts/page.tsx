@@ -1,4 +1,5 @@
 import { Link } from "@heroui/link";
+
 import prisma from "@/lib/prisma";
 
 export default async function Posts() {

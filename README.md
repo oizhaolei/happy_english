@@ -51,3 +51,9 @@ After modifying the `.npmrc` file, you need to run `pnpm install` again to ensur
 ## License
 
 Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
+
+## Import Vocabulary
+
+```shell
+cat ../l2pre/words1.csv | awk -F\" '{print "insert into vocabulary (lang_source, lang_target, from_message, to_message, batch_no) values (\"en\", \"ja\",\""$2"\",\""$4"\",1);"}' | sqlite3 prisma/dev.db                                                                   ─╯
+```
