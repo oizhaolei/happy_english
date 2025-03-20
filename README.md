@@ -48,11 +48,10 @@ public-hoist-pattern[]=*@heroui/*
 
 After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
 
-## Call `Google Translate`
+## Call Online Translate
 
-``` text
-https://translate.google.com/?sl=ja&tl=en&text=%E6%88%91&op=translate
-```
+- https://translate.google.com/?sl=ja&tl=en&text=%E6%88%91&op=translate
+- https://jisho.org/search/vocabulary
 
 ## Import Vocabulary from csv
 
@@ -72,6 +71,7 @@ head ../l2pre/words1.csv
 
 ```shell
 cat ../l2pre/words1.csv | awk -F\" '{print "insert into vocabulary (lang_source, lang_target, from_message, to_message, batch_no) values (\"en\", \"ja\",\""$2"\",\""$4"\",1);"}' | sqlite3 prisma/dev.db                                                                   ─╯
+cat ../l2pre/words2.csv | awk -F\" '{print "insert into vocabulary (lang_source, lang_target, from_message, to_message, batch_no) values (\"en\", \"ja\",\""$2"\",\""$4"\",2);"}'  | sqlite3 prisma/dev.db                                                                                                           
 ```
 
 ## License

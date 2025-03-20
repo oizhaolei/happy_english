@@ -6,5 +6,5 @@ import { Prisma } from "@prisma/client";
 export default async function Posts() {
   const vocabularies: Prisma.VocabularyGetPayload<{}>[] =
     await prisma.vocabulary.findMany();
-  return <VocabolaryTable data={vocabularies} />;
+  return <VocabolaryTable list={vocabularies} />;
 }
