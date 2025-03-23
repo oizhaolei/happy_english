@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
-import { VocabolaryRecite } from "@/components/vocabolary-recite";
+
+import { VocabolaryRecite } from "@/components/vocabolary/recite";
 
 // random
 export default async function Posts() {

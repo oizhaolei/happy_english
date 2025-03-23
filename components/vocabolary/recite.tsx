@@ -24,10 +24,9 @@ export const VocabolaryRecite = ({
   const [invalid, setInvalid] = useState(false);
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.ctrlKey && e.key === "Enter") {
+    if (e.key === "Enter") {
       window.location.reload();
     } else if (e.ctrlKey && e.key === "l") {
-      setValue("");
       setVisibleCount(visibleCount + 1);
     }
   };
@@ -45,31 +44,40 @@ export const VocabolaryRecite = ({
   };
 
   return (
-    <Card className="scale-150 w-[400px]">
-      <CardBody>
-        <Input
-          autoFocus
-          placeholder={mask(data.from_message, visibleCount)}
-          onKeyDown={handleInputKeyDown}
-          value={value}
-          onValueChange={handleValueChange}
-          description={`${value.length}/${data.from_message.length}`}
-          errorMessage="not correct"
-          isInvalid={invalid}
-          color={color}
-        />
-        <div>{data.to_message}</div>
-      </CardBody>
-      <CardFooter>
-        <div className="flex flex-col gap-4 text-left">
-          <Code size="sm">
-            <Kbd keys={["ctrl"]}>l</Kbd> : Show Hint
-          </Code>
-          <Code size="sm">
-            <Kbd keys={["ctrl"]}>Enter</Kbd>: Next Question
-          </Code>
-        </div>
-      </CardFooter>
-    </Card>
+    <>
+      <Card className="scale-150 w-[400px]">
+        <CardBody>
+          <Input
+            autoFocus
+            onKeyDown={handleInputKeyDown}
+            value={value}
+            onValueChange={handleValueChange}
+            description={
+              <div>
+                <Code>{mask(data.from_message, visibleCount)}</Code>
+              </div>
+            }
+            endContent={`${value.length}/${data.from_message.length}`}
+            isInvalid={invalid}
+            color={color}
+          />
+          <div>{data.to_message}</div>
+        </CardBody>
+      </Card>
+      <div className="flex flex-col text-left  mt-10">
+        <Code size="sm">
+          <Kbd className="w-12" keys={["ctrl"]}>
+            l
+          </Kbd>
+          : Show Hint
+        </Code>
+        <Code size="sm">
+          <Kbd className="w-12" keys={[]}>
+            Enter
+          </Kbd>
+          : Next Question
+        </Code>
+      </div>
+    </>
   );
 };

@@ -74,6 +74,11 @@ cat ../l2pre/words1.csv | awk -F\" '{print "insert into vocabulary (lang_source,
 cat ../l2pre/words2.csv | awk -F\" '{print "insert into vocabulary (lang_source, lang_target, from_message, to_message, batch_no) values (\"en\", \"ja\",\""$2"\",\""$4"\",2);"}'  | sqlite3 prisma/dev.db                                                                                                           
 ```
 
+## TODO
+
+- summary
+- category: L2, L2Pre, L3
+
 ## License
 
 Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
