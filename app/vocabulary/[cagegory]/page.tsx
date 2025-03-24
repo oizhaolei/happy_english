@@ -1,9 +1,9 @@
 import { Prisma } from "@prisma/client";
 
 import prisma from "@/lib/prisma";
-import { VocabolaryRecite } from "@/components/vocabolary/recite";
+import { VocabularyRecite } from "@/components/vocabulary/recite";
 
-export default async function Posts({
+export default async function VocabularyPage({
   params,
 }: {
   params: Promise<{ category: string }>;
@@ -26,7 +26,7 @@ export default async function Posts({
       skip: skip,
     });
   if (vocabularies && vocabularies.length > 0) {
-    return <VocabolaryRecite data={vocabularies[0]} />;
+    return <VocabularyRecite data={vocabularies[0]} />;
   } else {
     <div>Please Refresh</div>;
   }

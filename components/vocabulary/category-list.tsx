@@ -8,7 +8,7 @@ const ListboxWrapper = ({ children }: { children: ReactNode }) => (
     {children}
   </div>
 );
-export const VocabolaryList = ({ list }: { list: { category: string }[] }) => {
+export const VocabularyList = ({ list }: { list: { category: string }[] }) => {
   return (
     <ListboxWrapper>
       <Listbox aria-label="Actions" topContent="Choose Grade Please:">

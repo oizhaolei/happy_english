@@ -1,8 +1,8 @@
-import { VocabolaryList } from "@/components/vocabolary/category-list";
+import { VocabularyList } from "@/components/vocabulary/category-list";
 import prisma from "@/lib/prisma";
 
 // random
-export default async function Posts() {
+export default async function Vocabularis() {
   const categories = await prisma.vocabulary.findMany({
     distinct: ["category"],
     select: {
@@ -10,5 +10,5 @@ export default async function Posts() {
     },
   });
 
-  return <VocabolaryList list={categories} />;
+  return <VocabularyList list={categories} />;
 }

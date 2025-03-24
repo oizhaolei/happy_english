@@ -5,17 +5,18 @@ import { Code } from "@heroui/code";
 import { Input } from "@heroui/input";
 import { Kbd } from "@heroui/kbd";
 import { Prisma } from "@prisma/client";
-import { useState } from "react";
+import { useId, useState } from "react";
 
 function mask(str: string, cnt: number) {
   return `${str.substring(0, cnt)}${str.substring(cnt).replace(/[^ ]/g, "*")}`;
 }
 
-export const VocabolaryRecite = ({
+export const VocabularyRecite = ({
   data,
 }: {
   data: Prisma.VocabularyGetPayload<{}>;
 }) => {
+  const uid = useId();
   const [visibleCount, setVisibleCount] = useState(0);
   const [value, setValue] = useState("");
   const [color, setColor] = useState<
@@ -23,9 +24,27 @@ export const VocabolaryRecite = ({
   >("default");
   const [invalid, setInvalid] = useState(false);
 
-  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleInputKeyDown = async (
+    e: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
     if (e.key === "Enter") {
-      window.location.reload();
+      try {
+        const response = await fetch(`/api/vocabulary_test_result`, {
+          method: "POST",
+          body: JSON.stringify({
+            uid,
+            from_message: data.from_message,
+            input: value,
+            visibleCount,
+          }),
+        });
+        const res_json = await response.json();
+        console.log("res_json:", res_json);
+
+        window.location.reload();
+      } catch (error) {
+        console.error(error);
+      }
     } else if (e.ctrlKey && e.key === "l") {
       setVisibleCount(visibleCount + 1);
     }
@@ -34,7 +53,8 @@ export const VocabolaryRecite = ({
   const handleValueChange = (value: string) => {
     setValue(value);
     if (value.length === data.from_message.length) {
-      const invalid = value !== data.from_message;
+      const invalid =
+        value.toLocaleLowerCase() !== data.from_message.toLocaleLowerCase();
 
       setInvalid(invalid);
       setColor(invalid ? "danger" : "success");
