@@ -27,15 +27,30 @@ model Post {
 
 model Vocabulary {
   id              Int     @id @default(autoincrement())
+  category        String
   lang_source     String
   lang_target     String
   from_message    String
   to_message      String
   batch_no        Int
+  vocabularyTestResults VocabularyTestResult[]
+
+  @@index([category])
+}
+
+model VocabularyTestResult {
+  id              Int     @id @default(autoincrement())
+  vocabulary      Vocabulary @relation(fields: [vocabularyId], references: [id])
+  vocabularyId    Int
+  score           Int
+  batch_no        Int
 }
 
 model FillSentence {
   id            Int     @id @default(autoincrement())
+  category      String
   sentence      String
   answer        String
+
+  @@index([category])
 }
