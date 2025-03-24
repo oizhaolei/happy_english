@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardBody, CardFooter } from "@heroui/card";
+import { Card, CardBody } from "@heroui/card";
 import { Code } from "@heroui/code";
 import { Input } from "@heroui/input";
 import { Kbd } from "@heroui/kbd";
@@ -35,6 +35,7 @@ export const VocabolaryRecite = ({
     setValue(value);
     if (value.length === data.from_message.length) {
       const invalid = value !== data.from_message;
+
       setInvalid(invalid);
       setColor(invalid ? "danger" : "success");
     } else {
@@ -49,9 +50,7 @@ export const VocabolaryRecite = ({
         <CardBody>
           <Input
             autoFocus
-            onKeyDown={handleInputKeyDown}
-            value={value}
-            onValueChange={handleValueChange}
+            color={color}
             description={
               <div>
                 <Code>{mask(data.from_message, visibleCount)}</Code>
@@ -59,7 +58,9 @@ export const VocabolaryRecite = ({
             }
             endContent={`${value.length}/${data.from_message.length}`}
             isInvalid={invalid}
-            color={color}
+            value={value}
+            onKeyDown={handleInputKeyDown}
+            onValueChange={handleValueChange}
           />
           <div>{data.to_message}</div>
         </CardBody>
