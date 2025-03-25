@@ -1,8 +1,23 @@
-import prisma from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
+import { NextRequest } from "next/server";
 
-export async function GET() {
-  return Response.json({});
+import prisma from "@/lib/prisma";
+
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const uid = searchParams.get("uid") || "";
+
+  const results = await prisma.vocabularyTestResult.findMany({
+    where: {
+      uid,
+    },
+    orderBy: {
+      score: "asc",
+    },
+    take: 30,
+  });
+
+  return Response.json(results);
 }
 
 export async function POST(request: Request) {
@@ -24,7 +39,6 @@ export async function POST(request: Request) {
       },
     },
   });
-  console.log("created:", created);
 
   return new Response(JSON.stringify(created), {
     status: 201,

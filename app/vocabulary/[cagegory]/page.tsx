@@ -25,6 +25,7 @@ export default async function VocabularyPage({
       take: 1,
       skip: skip,
     });
+
   if (vocabularies && vocabularies.length > 0) {
     return <VocabularyQuiz data={vocabularies[0]} />;
   } else {

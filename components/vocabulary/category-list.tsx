@@ -8,6 +8,7 @@ const ListboxWrapper = ({ children }: { children: ReactNode }) => (
     {children}
   </div>
 );
+
 export const VocabularyCategoryList = ({
   list,
 }: {

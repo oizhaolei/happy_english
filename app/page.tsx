@@ -7,17 +7,6 @@ import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
 
-import prisma from "@/lib/prisma";
-
-const Users = async () => {
-  const users = await prisma.user.findMany();
-  return users.map((user) => (
-    <li key={user.id} className="mb-2">
-      {user.name}
-    </li>
-  ));
-};
-
 export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -54,8 +43,6 @@ export default function Home() {
           GitHub
         </Link>
       </div>
-
-      <Users />
       <div className="mt-8">
         <Snippet hideCopyButton hideSymbol variant="bordered">
           <span>

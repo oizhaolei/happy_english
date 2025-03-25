@@ -52,6 +52,7 @@ After modifying the `.npmrc` file, you need to run `pnpm install` again to ensur
 
 - https://translate.google.com/?sl=ja&tl=en&text=%E6%88%91&op=translate
 - https://jisho.org/search/vocabulary
+- https://www.ei-navi.jp/dictionary/content/above/
 
 ## Import Vocabulary from csv
 
