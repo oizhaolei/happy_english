@@ -11,7 +11,7 @@ function mask(str: string, cnt: number) {
   return `${str.substring(0, cnt)}${str.substring(cnt).replace(/[^ ]/g, "*")}`;
 }
 
-export const VocabularyRecite = ({
+export const VocabularyQuiz = ({
   data,
 }: {
   data: Prisma.VocabularyGetPayload<{}>;
