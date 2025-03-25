@@ -24,8 +24,11 @@ model Vocabulary {
 
 model VocabularyTestResult {
   id              Int     @id @default(autoincrement())
-  from_message    String  @unique()
+  uid             String
+  from_message    String
   score           Int
+
+  @@unique([uid, from_message])
 }
 
 model FillSentence {

@@ -1,4 +1,4 @@
-import { VocabularyList } from "@/components/vocabulary/category-list";
+import { VocabularyCategoryList } from "@/components/vocabulary/category-list";
 import prisma from "@/lib/prisma";
 
 // random
@@ -10,5 +10,5 @@ export default async function Vocabularis() {
     },
   });
 
-  return <VocabularyList list={categories} />;
+  return <VocabularyCategoryList list={categories} />;
 }

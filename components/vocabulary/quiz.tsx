@@ -29,13 +29,17 @@ export const VocabularyQuiz = ({
   ) => {
     if (e.key === "Enter") {
       try {
+        const score =
+          value.toLocaleLowerCase() === data.from_message.toLocaleLowerCase()
+            ? (100 * (data.from_message.length - visibleCount)) /
+              data.from_message.length
+            : 0;
         const response = await fetch(`/api/vocabulary_test_result`, {
           method: "POST",
           body: JSON.stringify({
             uid,
             from_message: data.from_message,
-            input: value,
-            visibleCount,
+            score,
           }),
         });
         const res_json = await response.json();
