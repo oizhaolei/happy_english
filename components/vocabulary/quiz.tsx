@@ -2,7 +2,7 @@
 
 import Iframe from "react-iframe";
 
-import { Card, CardBody } from "@heroui/card";
+import { Card, CardBody, CardFooter } from "@heroui/card";
 import { Code } from "@heroui/code";
 import { Input } from "@heroui/input";
 import { Kbd } from "@heroui/kbd";
@@ -85,47 +85,47 @@ export const VocabularyQuiz = ({
   };
 
   return (
-    <>
-      <Card className="scale-150 w-[400px]">
+    <div className="columns-2">
+      <Card className="">
         <CardBody>
           <Input
             autoFocus
             color={color}
-            description={
-              <div>
-                <Code>{mask(data.from_message, visibleCount)}</Code>
-              </div>
-            }
+            size="lg"
             endContent={`${value.length}/${data.from_message.length}`}
             isInvalid={invalid}
             value={value}
             onKeyDown={handleInputKeyDown}
             onValueChange={handleValueChange}
           />
-          <div>{data.to_message}</div>
+          <Code size="lg">{mask(data.from_message, visibleCount)}</Code>
+          <div className="text-2xl">{data.to_message}</div>
         </CardBody>
+        <CardFooter className="gap-4">
+          <Code size="sm">
+            <Kbd className="w-12" keys={["ctrl"]}>
+              l
+            </Kbd>
+            : Show Hint
+          </Code>
+          <Code size="sm">
+            <Kbd className="w-12" keys={[]}>
+              Enter
+            </Kbd>
+            : Next Question
+          </Code>
+        </CardFooter>
       </Card>
-      <div className="flex flex-col text-left  mt-10">
-        <Code size="sm">
-          <Kbd className="w-12" keys={["ctrl"]}>
-            l
-          </Kbd>
-          : Show Hint
-        </Code>
-        <Code size="sm">
-          <Kbd className="w-12" keys={[]}>
-            Enter
-          </Kbd>
-          : Next Question
-        </Code>
+      <div className="w-[600px]">
+        {value.toLocaleLowerCase() ===
+          data.from_message.toLocaleLowerCase() && (
+          <Iframe
+            url={`https://www.ei-navi.jp/dictionary/content/${data.from_message}/`}
+            width="600px"
+            height="900px"
+          />
+        )}
       </div>
-      {value.toLocaleLowerCase() === data.from_message.toLocaleLowerCase() && (
-        <Iframe
-          url={`https://www.ei-navi.jp/dictionary/content/${data.from_message}/`}
-          width="1080px"
-          height="800px"
-        />
-      )}
-    </>
+    </div>
   );
 };
