@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Key, useCallback, useEffect, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -8,9 +8,10 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  getKeyValue,
 } from "@heroui/table";
 import { Prisma } from "@prisma/client";
+import { Progress } from "@heroui/progress";
+import { Link } from "@heroui/link";
 const columns = [
   {
     key: "from_message",
@@ -41,6 +42,28 @@ export const VocabularyResultTable = () => {
     })();
   }, []);
 
+  const renderCell = useCallback(
+    (item: Prisma.VocabularyTestResultGetPayload<{}>, columnKey: Key) => {
+      switch (columnKey) {
+        case "from_message":
+          return (
+            <Link
+              isExternal
+              href={`https://www.ei-navi.jp/dictionary/content/${item.from_message}/`}
+            >
+              {item.from_message}
+            </Link>
+          );
+
+        case "score":
+          return <Progress size="sm" value={item.score} />;
+        default:
+          return "-";
+      }
+    },
+    [],
+  );
+
   return (
     <Table aria-label="Example table with dynamic content">
       <TableHeader columns={columns}>
@@ -50,7 +73,7 @@ export const VocabularyResultTable = () => {
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => (
-              <TableCell>{getKeyValue(item, columnKey)}</TableCell>
+              <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}
           </TableRow>
         )}

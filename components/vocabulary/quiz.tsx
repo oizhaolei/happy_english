@@ -59,7 +59,7 @@ export const VocabularyQuiz = ({
               score,
             }),
           });
-          const res_json = await response.json();
+          await response.json();
         }
         window.location.reload();
       } catch (error) {
