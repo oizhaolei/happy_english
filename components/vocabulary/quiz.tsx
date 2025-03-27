@@ -117,14 +117,18 @@ export const VocabularyQuiz = ({
         </CardFooter>
       </Card>
       <div className="w-[600px]">
-        {value.toLocaleLowerCase() ===
-          data.from_message.toLocaleLowerCase() && (
-          <iframe
-            src={`https://www.ei-navi.jp/dictionary/content/${data.from_message}/`}
-            width="600px"
-            height="900px"
-          />
-        )}
+        <iframe
+          src={`https://www.ei-navi.jp/dictionary/content/${data.from_message}/`}
+          width="600px"
+          height="900px"
+          style={{
+            visibility:
+              value.toLocaleLowerCase() ===
+              data.from_message.toLocaleLowerCase()
+                ? "visible"
+                : "hidden",
+          }}
+        />
       </div>
     </div>
   );
