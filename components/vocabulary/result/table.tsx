@@ -65,7 +65,10 @@ export const VocabularyResultTable = () => {
   );
 
   return (
-    <Table aria-label="Example table with dynamic content">
+    <Table
+      aria-label="Example table with dynamic content"
+      selectionMode="single"
+    >
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>

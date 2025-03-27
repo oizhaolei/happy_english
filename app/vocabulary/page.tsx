@@ -12,9 +12,13 @@ export default async function Vocabularis() {
   });
 
   return (
-    <div className="inline-block max-w-lg text-center justify-center">
-      <VocabularyCategoryList list={categories} />
-      <VocabularyResultTable />
+    <div className="grid grid-cols-6 gap-4">
+      <div className="col-start-1 col-end-3 ">
+        <VocabularyCategoryList list={categories} />
+      </div>
+      <div className="col-start-4 col-end-6 ">
+        <VocabularyResultTable />
+      </div>
     </div>
   );
 }

@@ -16,7 +16,7 @@ export const VocabularyCategoryList = ({
 }) => {
   return (
     <ListboxWrapper>
-      <Listbox aria-label="Actions" topContent="Choose Grade Please:">
+      <Listbox aria-label="Actions" topContent="Enter Grade:">
         {list.map((voca) => (
           <ListboxItem
             key={voca.category}
