@@ -48,6 +48,7 @@ export const VocabularyResultTable = () => {
         case "from_message":
           return (
             <Link
+              aria-label="Table Columns"
               isExternal
               href={`https://www.ei-navi.jp/dictionary/content/${item.from_message}/`}
             >
@@ -56,7 +57,9 @@ export const VocabularyResultTable = () => {
           );
 
         case "score":
-          return <Progress size="sm" value={item.score} />;
+          return (
+            <Progress aria-label="Table Columns" size="sm" value={item.score} />
+          );
         default:
           return "-";
       }

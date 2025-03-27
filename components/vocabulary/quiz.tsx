@@ -5,7 +5,9 @@ import { Code } from "@heroui/code";
 import { Input } from "@heroui/input";
 import { Kbd } from "@heroui/kbd";
 import { Prisma } from "@prisma/client";
+import { db } from "../db";
 import { useEffect, useState } from "react";
+import { QuizHistory } from "./quiz-history";
 
 function mask(str: string, cnt: number) {
   return `${str.substring(0, cnt)}${str.substring(cnt).replace(/[^ ]/g, "*")}`;
@@ -59,6 +61,11 @@ export const VocabularyQuiz = ({
           });
           await response.json();
         }
+        db.quizes.add({
+          id: data.id,
+          from_message: data.from_message,
+          score,
+        });
         window.location.reload();
       } catch (error) {
         console.error(error);
@@ -84,38 +91,41 @@ export const VocabularyQuiz = ({
 
   return (
     <div className="columns-2">
-      <Card className="">
-        <CardBody>
-          <Input
-            autoFocus
-            color={color}
-            size="lg"
-            endContent={`${value.length}/${data.from_message.length}`}
-            isInvalid={invalid}
-            value={value}
-            onKeyDown={handleInputKeyDown}
-            onValueChange={handleValueChange}
-          />
-          <Code size="lg">{mask(data.from_message, visibleCount)}</Code>
-          <div className="text-2xl whitespace-break-spaces">
-            {data.to_message.replace(/\\n/g, "\n")}
-          </div>
-        </CardBody>
-        <CardFooter className="gap-4">
-          <Code size="sm">
-            <Kbd className="w-12" keys={["ctrl"]}>
-              l
-            </Kbd>
-            : Show Hint
-          </Code>
-          <Code size="sm">
-            <Kbd className="w-12" keys={[]}>
-              Enter
-            </Kbd>
-            : Next Question
-          </Code>
-        </CardFooter>
-      </Card>
+      <div className="w-[600px]">
+        <Card>
+          <CardBody>
+            <Input
+              autoFocus
+              color={color}
+              size="lg"
+              endContent={`${value.length}/${data.from_message.length}`}
+              isInvalid={invalid}
+              value={value}
+              onKeyDown={handleInputKeyDown}
+              onValueChange={handleValueChange}
+            />
+            <Code size="lg">{mask(data.from_message, visibleCount)}</Code>
+            <div className="text-2xl whitespace-break-spaces">
+              {data.to_message.replace(/\\n/g, "\n")}
+            </div>
+          </CardBody>
+          <CardFooter className="gap-4">
+            <Code size="sm">
+              <Kbd className="w-12" keys={["ctrl"]}>
+                l
+              </Kbd>
+              : Show Hint
+            </Code>
+            <Code size="sm">
+              <Kbd className="w-12" keys={[]}>
+                Enter
+              </Kbd>
+              : Next Question
+            </Code>
+          </CardFooter>
+        </Card>
+        <QuizHistory />
+      </div>
       <div className="w-[600px]">
         <iframe
           src={`https://www.ei-navi.jp/dictionary/content/${data.from_message}/`}
