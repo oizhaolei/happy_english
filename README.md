@@ -77,8 +77,10 @@ cat ../l2pre/words2.csv | awk -F\" '{print "insert into vocabulary (lang_source,
 
 ## TODO
 
-- summary
-- category: L2, L2Pre, L3
+- DONE summary
+- DONE category: L2, L2Pre, L3
+- session
+- dockerize
 
 ## License
 

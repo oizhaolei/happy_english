@@ -99,7 +99,9 @@ export const VocabularyQuiz = ({
             onValueChange={handleValueChange}
           />
           <Code size="lg">{mask(data.from_message, visibleCount)}</Code>
-          <div className="text-2xl">{data.to_message}</div>
+          <div className="text-2xl whitespace-break-spaces">
+            {data.to_message.replace(/\\n/g, "\n")}
+          </div>
         </CardBody>
         <CardFooter className="gap-4">
           <Code size="sm">
