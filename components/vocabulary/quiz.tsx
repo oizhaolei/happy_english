@@ -1,7 +1,5 @@
 "use client";
 
-import Iframe from "react-iframe";
-
 import { Card, CardBody, CardFooter } from "@heroui/card";
 import { Code } from "@heroui/code";
 import { Input } from "@heroui/input";
@@ -121,8 +119,8 @@ export const VocabularyQuiz = ({
       <div className="w-[600px]">
         {value.toLocaleLowerCase() ===
           data.from_message.toLocaleLowerCase() && (
-          <Iframe
-            url={`https://www.ei-navi.jp/dictionary/content/${data.from_message}/`}
+          <iframe
+            src={`https://www.ei-navi.jp/dictionary/content/${data.from_message}/`}
             width="600px"
             height="900px"
           />
