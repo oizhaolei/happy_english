@@ -50,7 +50,7 @@ export const VocabularyResultTable = () => {
             <Link
               aria-label="Table Columns"
               isExternal
-              href={`https://www.ei-navi.jp/dictionary/content/${item.from_message}/`}
+              href={`https://www.ei-navi.jp/dictionary/content/${item.from_message.toLocaleLowerCase()}/`}
             >
               {item.from_message}
             </Link>

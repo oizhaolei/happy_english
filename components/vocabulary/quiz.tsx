@@ -62,7 +62,7 @@ export const VocabularyQuiz = ({
           await response.json();
         }
         db.quizes.add({
-          id: data.id,
+          id: new Date().getTime(),
           from_message: data.from_message,
           score,
         });
@@ -128,7 +128,7 @@ export const VocabularyQuiz = ({
       </div>
       <div className="w-[600px]">
         <iframe
-          src={`https://www.ei-navi.jp/dictionary/content/${data.from_message}/`}
+          src={`https://www.ei-navi.jp/dictionary/content/${data.from_message.toLocaleLowerCase()}/`}
           width="600px"
           height="900px"
           style={{
